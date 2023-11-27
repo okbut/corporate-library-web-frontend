@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import TheLayout from '@/components/layouts/TheLayout.vue'
 </script>
 
 <template>
-  <main>
+  <TheLayout>
     <p class="text-red-500">hi</p>
-  </main>
+  </TheLayout>
 </template>
