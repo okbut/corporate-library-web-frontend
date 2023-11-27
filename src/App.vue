@@ -6,6 +6,6 @@ import Layout from './components/Layout.vue';
 
 <template>
   <Layout>
-    <p>Library</p>
+    <p class="text-red-500">Library</p>
   </Layout>
 </template>
