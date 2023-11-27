@@ -5,7 +5,7 @@ import TheHeader from '../ui/TheHeader.vue'
 <template>
   <div class="flex flex-col items-center w-full min-h-screen">
     <TheHeader />
-    <main class="flex-1 w-1/2">
+    <main class="flex-1 w-2/5">
       <slot />
     </main>
   </div>
