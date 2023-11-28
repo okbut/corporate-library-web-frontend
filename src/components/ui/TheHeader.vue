@@ -1,5 +1,5 @@
 <template>
-  <header class="w-1/2">
+  <header class="w-2/5">
     <nav class="flex items-center justify-between w-full">
       <div class="p-3">
         <span class="text-3xl">사내도서관</span>
@@ -7,7 +7,7 @@
       <div>
         <ul>
           <li>
-            <span>auth</span>
+            <span class="material-symbols-outlined"> account_circle </span>
           </li>
         </ul>
       </div>
