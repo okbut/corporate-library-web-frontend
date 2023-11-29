@@ -15,7 +15,7 @@ defineProps<{
 <template>
   <div class="w-4/5 h-20 p-2 border rounded-lg shadow-md">
     <RouterLink
-      :to="{ name: 'book detail', params: { isbn: bookData.isbn } }"
+      :to="{ name: 'book detail', params: { code: bookData.isbn } }"
       class="block w-full h-full"
     >
       <span>{{ bookData.title }}</span>

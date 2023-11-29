@@ -16,9 +16,11 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/books/:isbn',
+      path: '/books/:code([a-zA-Z0-9]+)',
       name: 'book detail',
-      component: BookDetailView
+      component: BookDetailView,
+      strict: true,
+      sensitive: true
     }
   ]
 })
