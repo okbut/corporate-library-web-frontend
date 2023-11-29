@@ -13,4 +13,11 @@ app.use(createPinia())
 app.use(router)
 app.use(VueQueryPlugin)
 
-app.mount('#app')
+const enableMocking = async () => {
+  if (import.meta.env.MODE !== 'development') return
+
+  const { worker } = await import('./mocks/browser')
+  return worker.start({ onUnhandledRequest: 'bypass' })
+}
+
+enableMocking().then(() => app.mount('#app'))
