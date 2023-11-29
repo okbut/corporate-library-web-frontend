@@ -2,7 +2,9 @@
   <header class="w-2/5">
     <nav class="flex items-center justify-between w-full">
       <div class="p-3">
-        <span class="text-3xl">사내도서관</span>
+        <RouterLink to="/">
+          <span class="text-3xl">사내도서관</span>
+        </RouterLink>
       </div>
       <div>
         <ul>
