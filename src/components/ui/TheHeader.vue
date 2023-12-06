@@ -20,14 +20,14 @@
             </svg>
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li><a>도서 검색</a></li>
+            <li><RouterLink to="/books">도서 검색</RouterLink></li>
             <li><a>관리자</a></li>
           </ul>
         </details>
       </div>
     </div>
     <div class="navbar-center">
-      <a class="text-xl btn btn-ghost">사내도서관</a>
+      <RouterLink class="text-xl btn btn-ghost" to="/">사내도서관</RouterLink>
     </div>
     <div class="navbar-end">
       <div class="dropdown dropdown-end">
