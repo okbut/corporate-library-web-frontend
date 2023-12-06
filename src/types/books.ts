@@ -1,19 +1,9 @@
-export type BookItemType = {
-  classification: string
-  isbn: string
-  title: string
-  description: string
-  author: string
-  publisher: string
-  publishYear: string
-}
-
-export type BookDetailType = {
+export type BookType = {
   code: string
-  classification: string
-  isbn: string
+  classification: string | null
+  isbn: string | null
   title: string
-  description: string
+  description: string | null
   author: string
   publisher: string
   publishYear: string

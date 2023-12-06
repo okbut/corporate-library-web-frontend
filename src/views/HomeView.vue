@@ -6,7 +6,9 @@ import TheLayout from '@/components/layouts/TheLayout.vue'
 
 <template>
   <TheLayout>
-    <SearchInput />
-    <BookList />
+    <div class="flex flex-col items-center p-3 mt-5">
+      <SearchInput />
+      <BookList />
+    </div>
   </TheLayout>
 </template>
