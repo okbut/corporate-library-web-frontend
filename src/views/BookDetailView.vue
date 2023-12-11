@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <TheLayout>
+  <the-layout>
     <div class="grid justify-center gap-10 mt-10" v-if="bookDetail">
       <div class="flex justify-center">
         <div
@@ -37,5 +37,5 @@ onMounted(() => {
         <p>{{ bookDetail.description }}</p>
       </div>
     </div>
-  </TheLayout>
+  </the-layout>
 </template>
