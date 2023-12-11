@@ -5,10 +5,10 @@ import TheLayout from '@/components/layouts/TheLayout.vue'
 </script>
 
 <template>
-  <TheLayout>
+  <the-layout>
     <div class="flex flex-col items-center p-3 mt-5">
-      <SearchInput />
-      <BookList />
+      <search-input />
+      <book-list />
     </div>
-  </TheLayout>
+  </the-layout>
 </template>
