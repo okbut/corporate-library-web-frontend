@@ -1,8 +1,12 @@
+import type { AxiosResponse } from 'axios'
 import apiClient from './apiClient'
 
-export const BooksAPI = {
-  list: async () => {
-    const response = await apiClient.get('/books')
+export const BooksAPI: {
+  list: (pageNum: number) => Promise<AxiosResponse<any, any>>
+  detail: (code: string) => Promise<AxiosResponse<any, any>>
+} = {
+  list: async (pageNum: number) => {
+    const response = await apiClient.get(`/books?page=${String(pageNum)}`)
 
     return response
   },
