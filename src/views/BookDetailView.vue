@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
   <the-layout>
-    <div class="grid justify-center gap-10 mt-10" v-if="bookDetail">
+    <div class="flex items-center justify-center w-full h-full gap-10" v-if="bookDetail">
       <div>
         <p class="text-sm">
           {{ bookDetail.title }}

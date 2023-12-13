@@ -21,7 +21,7 @@
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li><router-link to="/books">도서 검색</router-link></li>
-            <li><a>관리자</a></li>
+            <li><router-link to="/add-book">도서 추가</router-link></li>
           </ul>
         </details>
       </div>
