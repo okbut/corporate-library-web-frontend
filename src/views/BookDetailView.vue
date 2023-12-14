@@ -10,7 +10,7 @@ const bookDetail: Ref<BookType | null> = ref(null)
 
 const fetchBookDetail = async (code: string) => {
   const res = await BooksAPI.detail(code)
-  const data = await res.data
+  const data = await res.json()
 
   bookDetail.value = data
 }
@@ -22,14 +22,7 @@ onMounted(() => {
 
 <template>
   <the-layout>
-    <div class="grid justify-center gap-10 mt-10" v-if="bookDetail">
-      <div class="flex justify-center">
-        <div
-          class="flex items-center self-center justify-center w-9/12 border border-gray-200 rounded-lg h-60"
-        >
-          <span>QR 코드 자리</span>
-        </div>
-      </div>
+    <div class="flex items-center justify-center w-full h-full gap-10" v-if="bookDetail">
       <div>
         <p class="text-sm">
           {{ bookDetail.title }}

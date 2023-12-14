@@ -10,7 +10,7 @@ const bookList: Ref<BookType[]> = ref([])
 const fetchBookList = async (pageNum: number) => {
   const res = await BooksAPI.list(pageNum)
 
-  const data = await res.data
+  const data = await res.json()
 
   bookList.value = data
 }
