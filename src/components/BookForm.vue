@@ -9,6 +9,6 @@ import BookFormTextarea from './BookFormTextarea.vue'
     <book-form-textarea label="책 소개" name="description"></book-form-textarea>
     <book-form-input label="저자" name="author"></book-form-input>
     <book-form-input label="출판사" name="publisher"></book-form-input>
-    <book-form-input label="발행 연도" name="publisher"></book-form-input>
+    <book-form-input label="발행 연도" name="publisherYear"></book-form-input>
   </form>
 </template>
