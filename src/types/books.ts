@@ -8,3 +8,8 @@ export type BookType = {
   publisher: string
   publishYear: string
 }
+
+export type BookFromType = Pick<
+  BookType,
+  'title' | 'description' | 'author' | 'publisher' | 'publishYear'
+>
