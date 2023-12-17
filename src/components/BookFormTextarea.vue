@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
-defineProps<{ label: string; name: string }>()
+defineProps<{ label: string; modelValue: string | undefined }>()
+defineEmits<{
+  (e: 'update:modelValue', value: string): void
+}>()
 </script>
 
 <template>
@@ -9,7 +10,11 @@ defineProps<{ label: string; name: string }>()
     <div class="label">
       <span class="label-text">{{ label }}</span>
     </div>
-    <textarea :name="name" class="textarea textarea-bordered" />
+    <textarea
+      class="textarea textarea-bordered"
+      :value="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+    />
     <slot />
   </label>
 </template>

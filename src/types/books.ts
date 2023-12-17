@@ -8,3 +8,5 @@ export type BookType = {
   publisher: string
   publishYear: string
 }
+
+export type BookFormType = Omit<BookType, 'code'>
