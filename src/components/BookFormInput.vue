@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-defineProps<{ label: string; name: string; inputValue: string | null; validation: boolean }>()
+defineProps<{
+  label: string
+  modelValue: string | undefined
+  error: string | undefined
+}>()
 defineEmits<{
-  (e: 'update:inputValue', value: string): void
+  (e: 'update:modelValue', value: string): void
 }>()
 </script>
 
@@ -14,11 +18,10 @@ defineEmits<{
     </div>
     <input
       type="text"
-      :name="name"
-      :value="inputValue"
       class="input input-bordered"
-      :class="{ 'border-red-300': !validation }"
-      @input="$emit('update:inputValue', ($event.target as HTMLInputElement).value)"
+      :class="{ 'border-red-200': error }"
+      :value="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
     <slot />
   </label>

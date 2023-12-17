@@ -1,4 +1,4 @@
-import type { BookFromType } from './../types/books'
+import type { BookFormType } from './../types/books'
 
 const baseUrl = import.meta.env.MODE !== 'production' ? '/' : ''
 
@@ -13,7 +13,7 @@ export const BooksAPI = {
 
     return response
   },
-  add: async (bookFormData: BookFromType) => {
+  add: async (bookFormData: BookFormType) => {
     const response = await fetch(`${baseUrl}api/books`, {
       method: 'POST',
       body: JSON.stringify(bookFormData)

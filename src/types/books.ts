@@ -9,7 +9,7 @@ export type BookType = {
   publishYear: string
 }
 
-export type BookFromType = Pick<
+export type BookFormType = Pick<
   BookType,
   'title' | 'description' | 'author' | 'publisher' | 'publishYear'
 >
