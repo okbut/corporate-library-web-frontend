@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 defineProps<{ label: string; modelValue: string | undefined }>()
 defineEmits<{
   (e: 'update:modelValue', value: string): void

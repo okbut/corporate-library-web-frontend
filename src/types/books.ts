@@ -9,7 +9,4 @@ export type BookType = {
   publishYear: string
 }
 
-export type BookFormType = Pick<
-  BookType,
-  'title' | 'description' | 'author' | 'publisher' | 'publishYear'
->
+export type BookFormType = Omit<BookType, 'code'>
