@@ -1,38 +1,37 @@
 <script setup lang="ts">
-import { ref, onMounted, type Ref } from 'vue'
+import { ref } from 'vue'
+import { useQuery } from '@tanstack/vue-query'
+
 import ThePaginator from './ThePaginator.vue'
 import BookItem from './BookItem.vue'
 
-import type { BookType } from '@/types/books'
 import { BooksAPI } from '@/api/books'
-
-const bookList: Ref<BookType[]> = ref([])
-const fetchBookList = async (pageNum: number) => {
-  const res = await BooksAPI.list(pageNum)
-
-  const data = await res.json()
-
-  bookList.value = data
-}
-
-onMounted(() => {
-  fetchBookList(1)
-})
 
 const selectedPageNum = ref(1)
 
-const onSelectedPage = (pageNum: number) => {
+const {
+  isPending: bookListIsPending,
+  isError: bookListIsError,
+  data: bookList,
+  error: bookListError
+} = useQuery({
+  queryKey: ['bookList', selectedPageNum],
+  queryFn: () => BooksAPI.list(selectedPageNum.value)
+})
+
+const selectPage = (pageNum: number) => {
   selectedPageNum.value = pageNum
-  fetchBookList(pageNum)
 }
 </script>
 <template>
   <div class="flex-1 w-full mt-10">
-    <ul class="flex flex-col gap-3">
-      <li v-for="book in bookList" :key="book.code" class="flex justify-center">
-        <book-item :book-data="book" />
-      </li>
-    </ul>
-    <the-paginator :selected-page-num="selectedPageNum" @on-selected-page="onSelectedPage" />
+    <div>
+      <ul class="flex flex-col gap-3">
+        <li v-for="book in bookList" :key="book.code" class="flex justify-center">
+          <book-item :book-data="book" />
+        </li>
+      </ul>
+      <the-paginator :selected-page-num="selectedPageNum" @select-page="selectPage" />
+    </div>
   </div>
 </template>

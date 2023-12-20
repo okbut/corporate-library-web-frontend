@@ -5,8 +5,9 @@ const baseUrl = import.meta.env.MODE !== 'production' ? '/' : ''
 export const BooksAPI = {
   list: async (pageNum: number) => {
     const response = await fetch(`${baseUrl}api/books?page=${String(pageNum)}&size=30`)
+    const data = await response.json()
 
-    return response
+    return data
   },
   detail: async (code: string) => {
     const response = await fetch(`${baseUrl}api/books/${code}`)

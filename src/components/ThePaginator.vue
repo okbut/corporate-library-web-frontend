@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 
 const props = defineProps(['selectedPageNum'])
-const emits = defineEmits(['onSelectedPage'])
+const emits = defineEmits(['selectPage'])
 
 const pageNumsArray = ref([1, 2, 3, 4])
 
 const onClickPageButton = (pageNum: number) => {
-  emits('onSelectedPage', pageNum)
+  emits('selectPage', pageNum)
 }
 </script>
 <template>
