@@ -20,6 +20,7 @@ const submitHandler = () => {
         <input type="text" class="input input-bordered" v-model="id" />
         <label>비밀번호</label>
         <input type="text" class="input input-bordered" v-model="password" />
+        <button class="btn">로그인</button>
       </form>
     </div>
   </the-layout>
