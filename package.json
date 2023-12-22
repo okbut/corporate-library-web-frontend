@@ -16,9 +16,12 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.9.0",
+    "@vueuse/core": "^10.7.0",
+    "@vueuse/integrations": "^10.7.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
     "daisyui": "^4.4.19",
+    "jwt-decode": "^3",
     "msw": "^2.0.9",
     "pinia": "^2.1.7",
     "postcss": "^8.4.31",

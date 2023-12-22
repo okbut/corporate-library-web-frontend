@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useJwt } from '@vueuse/integrations/useJwt'
 
 import { AuthAPI } from '@/api/auth'
 
@@ -13,9 +14,14 @@ const submitHandler = async () => {
   formData.append('username', id.value)
   formData.append('password', password.value)
 
-  const res = AuthAPI.signIn(formData)
+  const res = await AuthAPI.signIn(formData)
+  const data = res.data
 
-  console.log(res)
+  const { payload } = useJwt(data.accessToken)
+
+  localStorage.setItem('username', payload.value ? payload.value.sub! : '')
+  localStorage.setItem('accessToken', data.accessToken)
+  localStorage.setItem('refreshToken', data.refreshToken)
 }
 </script>
 
