@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useJwt } from '@vueuse/integrations/useJwt'
 
 import { AuthAPI } from '@/api/auth'
 import { useAuthStore } from '@/stores/auth'
 
 import TheLayout from '@/components/layouts/TheLayout.vue'
+
+const router = useRouter()
 
 const store = useAuthStore()
 
@@ -27,6 +30,8 @@ const submitHandler = async () => {
   localStorage.setItem('refreshToken', data.refreshToken)
 
   store.authenticate()
+
+  router.push('/books')
 }
 </script>
 
