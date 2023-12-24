@@ -9,17 +9,17 @@ export const BooksAPI: {
   add: (bookFormData: BookFormType) => Promise<AxiosResponse<any, any>>
 } = {
   list: async (pageNum: number) => {
-    const response = await axiosInstance(`api/books?page=${String(pageNum)}&size=30`)
+    const response = await axiosInstance(`api/api/books?page=${String(pageNum)}&size=30`)
 
     return response
   },
   detail: async (code: string) => {
-    const response = await axiosInstance(`api/books/${code}`)
+    const response = await axiosInstance(`api/api/books/${code}`)
 
     return response
   },
   add: async (bookFormData: BookFormType) => {
-    const response = await axiosInstance.post(`api/books`, bookFormData)
+    const response = await axiosInstance.post(`api/api/books`, bookFormData)
 
     return response
   }

@@ -12,8 +12,7 @@ const selectedPageNum = ref(1)
 const {
   isPending: bookListIsPending,
   isError: bookListIsError,
-  data: bookList,
-  error: bookListError
+  data: bookListData
 } = useQuery({
   queryKey: ['bookList', selectedPageNum],
   queryFn: () => BooksAPI.list(selectedPageNum.value)
@@ -26,8 +25,8 @@ const selectPage = (pageNum: number) => {
 <template>
   <div class="flex-1 w-full mt-10">
     <div>
-      <ul class="flex flex-col gap-3">
-        <li v-for="book in bookList" :key="book.code" class="flex justify-center">
+      <ul class="flex flex-col gap-3" v-if="bookListData && !bookListIsPending && !bookListIsError">
+        <li v-for="book in bookListData.data.books" :key="book.code" class="flex justify-center">
           <book-item :book-data="book" />
         </li>
       </ul>
