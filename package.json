@@ -24,6 +24,7 @@
     "jwt-decode": "^3",
     "msw": "^2.0.9",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
     "vee-validate": "^4.12.3",

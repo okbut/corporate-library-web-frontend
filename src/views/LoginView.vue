@@ -3,8 +3,11 @@ import { ref } from 'vue'
 import { useJwt } from '@vueuse/integrations/useJwt'
 
 import { AuthAPI } from '@/api/auth'
+import { useAuthStore } from '@/stores/auth'
 
 import TheLayout from '@/components/layouts/TheLayout.vue'
+
+const store = useAuthStore()
 
 const id = ref('')
 const password = ref('')
@@ -22,6 +25,8 @@ const submitHandler = async () => {
   localStorage.setItem('username', payload.value ? payload.value.sub! : '')
   localStorage.setItem('accessToken', data.accessToken)
   localStorage.setItem('refreshToken', data.refreshToken)
+
+  store.authenticate()
 }
 </script>
 
