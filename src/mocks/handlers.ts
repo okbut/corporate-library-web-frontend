@@ -2,7 +2,7 @@ import { http, HttpResponse, HttpHandler } from 'msw'
 import { dummyBookList } from './data/dummyBookList'
 
 export const handlers: HttpHandler[] = [
-  http.get('http://localhost:5173/books', ({ request }) => {
+  http.get('http://localhost:5173/api/books', ({ request }) => {
     const url = new URL(request.url)
     const page = url.searchParams.get('page')
 
@@ -10,10 +10,13 @@ export const handlers: HttpHandler[] = [
 
     return HttpResponse.json([...dummyBookList[Number(page) - 1]])
   }),
-  http.get('http://localhost:5173/books/:code', ({ params }) => {
+  http.get('http://localhost:5173/api/books/:code', ({ params }) => {
     const { code } = params
     const foundBook = dummyBookList.flat().filter((book) => book.code === code)
 
     return HttpResponse.json(...foundBook)
+  }),
+  http.post('http://localhost:5173/api/auth/signin', ({ params }) => {
+    console.log(params)
   })
 ]

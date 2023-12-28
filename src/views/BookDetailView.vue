@@ -10,9 +10,8 @@ const bookDetail: Ref<BookType | null> = ref(null)
 
 const fetchBookDetail = async (code: string) => {
   const res = await BooksAPI.detail(code)
-  const data = await res.json()
 
-  bookDetail.value = data
+  bookDetail.value = res.data
 }
 
 onMounted(() => {
