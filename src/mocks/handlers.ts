@@ -15,5 +15,8 @@ export const handlers: HttpHandler[] = [
     const foundBook = dummyBookList.flat().filter((book) => book.code === code)
 
     return HttpResponse.json(...foundBook)
+  }),
+  http.post('http://localhost:5173/api/auth/signin', ({ params }) => {
+    console.log(params)
   })
 ]
