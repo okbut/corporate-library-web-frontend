@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import { pageNumbersGenerator } from '@/utils/pageNumbersGenerator'
+
 const props = defineProps(['count', 'selectedPageNum'])
 const emits = defineEmits(['selectPage'])
 
@@ -8,19 +10,12 @@ const computedSelectedPageNumber = computed(() => {
   return props.selectedPageNum
 })
 
+const pageCount = computed(() => {
+  return Math.floor(props.count / 10) + 1
+})
+
 const pageNumbersArray = computed(() => {
-  const pageNumArray = Array.from({ length: props.count }, (value, index) => index + 1)
-
-  if (computedSelectedPageNumber.value < 5) {
-    return pageNumArray.slice(0, 5)
-  } else if (computedSelectedPageNumber.value >= props.count - 3) {
-    return pageNumArray.slice(props.count - 5, props.count)
-  }
-
-  return pageNumArray.slice(
-    computedSelectedPageNumber.value - 3,
-    computedSelectedPageNumber.value + 2
-  )
+  return pageNumbersGenerator(pageCount.value, computedSelectedPageNumber.value)
 })
 
 const onClickPageButton = (pageNum: number) => {
@@ -29,6 +24,10 @@ const onClickPageButton = (pageNum: number) => {
 </script>
 <template>
   <div class="flex justify-center pt-5 join">
+    <template v-if="computedSelectedPageNumber + 1 > 4">
+      <button class="join-item btn" @click="() => onClickPageButton(0)">1</button>
+      <button class="join-item btn btn-disabled">...</button>
+    </template>
     <button
       class="join-item btn"
       :class="{ 'btn-active': pageNum === props.selectedPageNum + 1 }"
@@ -38,5 +37,11 @@ const onClickPageButton = (pageNum: number) => {
     >
       {{ pageNum }}
     </button>
+    <template v-if="computedSelectedPageNumber + 1 < pageCount - 3">
+      <button class="join-item btn btn-disabled">...</button>
+      <button class="join-item btn" @click="() => onClickPageButton(pageCount - 1)">
+        {{ pageCount }}
+      </button>
+    </template>
   </div>
 </template>
