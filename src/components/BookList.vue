@@ -7,7 +7,7 @@ import BookItem from './BookItem.vue'
 
 import { BooksAPI } from '@/api/books'
 
-const selectedPageNum = ref(1)
+const selectedPageNum = ref(0)
 
 const {
   isPending: bookListIsPending,
@@ -24,13 +24,17 @@ const selectPage = (pageNum: number) => {
 </script>
 <template>
   <div class="flex-1 w-full mt-10">
-    <div>
-      <ul class="flex flex-col gap-3" v-if="bookListData && !bookListIsPending && !bookListIsError">
+    <div v-if="bookListData && !bookListIsPending && !bookListIsError">
+      <ul class="flex flex-col gap-3">
         <li v-for="book in bookListData.data.books" :key="book.code" class="flex justify-center">
           <book-item :book-data="book" />
         </li>
       </ul>
-      <the-paginator :selected-page-num="selectedPageNum" @select-page="selectPage" />
+      <the-paginator
+        :count="bookListData.data.totalCount"
+        :selected-page-num="selectedPageNum"
+        @select-page="selectPage"
+      />
     </div>
   </div>
 </template>
