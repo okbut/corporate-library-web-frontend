@@ -23,9 +23,14 @@ const submitHandler = async () => {
   const res = await AuthAPI.signIn(formData)
   const data = res.data
 
-  const { payload } = useJwt(data.accessToken)
+  const { payload } = useJwt<{ exp: number; iat: number; role: string; sub: string }>(
+    data.accessToken
+  )
+
+  console.log(payload)
 
   localStorage.setItem('username', payload.value ? payload.value.sub! : '')
+  localStorage.setItem('role', payload.value ? payload.value.role! : '')
   localStorage.setItem('accessToken', data.accessToken)
   localStorage.setItem('refreshToken', data.refreshToken)
 
