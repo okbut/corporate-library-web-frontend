@@ -17,7 +17,7 @@ const logoutHandler = () => {
 <template>
   <div class="navbar bg-base-100">
     <div class="navbar-start">
-      <div class="dropdown">
+      <div class="dropdown" v-if="store.isAuth">
         <details class="dropdown">
           <summary class="btn btn-ghost btn-circle">
             <svg
@@ -46,13 +46,12 @@ const logoutHandler = () => {
       <router-link class="text-xl btn btn-ghost" to="/">사내도서관</router-link>
     </div>
     <div class="navbar-end">
-      <div class="dropdown dropdown-end">
+      <div class="dropdown dropdown-end" v-if="store.isAuth">
         <details class="dropdown">
           <summary class="btn btn-ghost btn-circle">
             <span class="material-symbols-outlined"> account_circle </span>
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li v-if="!store.isAuth"><router-link to="/">로그인</router-link></li>
             <li v-if="store.isAuth"><button @click="logoutHandler">로그아웃</button></li>
             <li v-if="store.isAdmin"><a>계정 생성</a></li>
           </ul>
