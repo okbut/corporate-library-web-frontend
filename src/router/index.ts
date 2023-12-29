@@ -41,6 +41,11 @@ router.beforeEach((to) => {
   if (!store.isAuth && to.name !== 'home') {
     alert('로그인 후 이용 가능합니다.')
     return { name: 'home' }
+  } else if (store.isAuth && to.name === 'home') {
+    return { name: 'book list' }
+  } else if (!store.isAdmin && to.name === 'add book') {
+    alert('관리자만 접근할 수 있습니다.')
+    return { name: 'book list' }
   }
 })
 
