@@ -19,7 +19,7 @@ export const BooksAPI: {
     return response
   },
   add: async (bookFormData: BookFormType) => {
-    const response = await axiosInstance.post(`/api/books`, bookFormData)
+    const response = await axiosInstance.post(`/admin/books`, bookFormData)
 
     return response
   }
