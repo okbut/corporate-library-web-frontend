@@ -5,22 +5,10 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
-
-const isAdmin = computed(() => {
-  const role = localStorage.getItem('role')
-
-  if (!role || role === 'ROLE_USER') return false
-
-  return true
-})
-
-const isLoggedIn = computed(() => {
-  const store = useAuthStore()
-
-  return store.isAuth
-})
+const store = useAuthStore()
 
 const logoutHandler = () => {
+  store.unauthorized()
   localStorage.clear()
   router.push('/')
 }
@@ -49,7 +37,7 @@ const logoutHandler = () => {
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li><router-link to="/books">도서 검색</router-link></li>
-            <li v-if="isAdmin"><router-link to="/add-book">도서 추가</router-link></li>
+            <li v-if="store.isAdmin"><router-link to="/add-book">도서 추가</router-link></li>
           </ul>
         </details>
       </div>
@@ -64,9 +52,9 @@ const logoutHandler = () => {
             <span class="material-symbols-outlined"> account_circle </span>
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li v-if="!isLoggedIn"><router-link to="/">로그인</router-link></li>
-            <li v-if="isLoggedIn"><button @click="logoutHandler">로그아웃</button></li>
-            <li v-if="isAdmin"><a>계정 생성</a></li>
+            <li v-if="!store.isAuth"><router-link to="/">로그인</router-link></li>
+            <li v-if="store.isAuth"><button @click="logoutHandler">로그아웃</button></li>
+            <li v-if="store.isAdmin"><a>계정 생성</a></li>
           </ul>
         </details>
       </div>
