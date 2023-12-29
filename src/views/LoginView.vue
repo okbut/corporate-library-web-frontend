@@ -20,23 +20,32 @@ const submitHandler = async () => {
   formData.append('username', id.value)
   formData.append('password', password.value)
 
-  const res = await AuthAPI.signIn(formData)
-  const data = res.data
+  try {
+    const res = await AuthAPI.signIn(formData)
+    const data = res.data
 
-  const { payload } = useJwt<{ exp: number; iat: number; role: string; sub: string }>(
-    data.accessToken
-  )
+    const { payload } = useJwt<{ exp: number; iat: number; role: string; sub: string }>(
+      data.accessToken
+    )
 
-  console.log(payload)
+    if (payload.value) {
+      localStorage.setItem('username', payload.value ? payload.value.sub! : '')
+      localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
 
-  localStorage.setItem('username', payload.value ? payload.value.sub! : '')
-  localStorage.setItem('role', payload.value ? payload.value.role! : '')
-  localStorage.setItem('accessToken', data.accessToken)
-  localStorage.setItem('refreshToken', data.refreshToken)
+      if (payload.value.role === 'ROLE_ADMIN') {
+        store.setAdmin()
+      }
+    } else {
+      alert('로그인에 실패했습니다.')
+    }
 
-  store.authenticate()
+    store.authenticate()
 
-  router.push('/books')
+    router.push('/books')
+  } catch (err) {
+    alert('로그인에 실패했습니다.')
+  }
 }
 </script>
 
