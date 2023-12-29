@@ -20,18 +20,32 @@ const submitHandler = async () => {
   formData.append('username', id.value)
   formData.append('password', password.value)
 
-  const res = await AuthAPI.signIn(formData)
-  const data = res.data
+  try {
+    const res = await AuthAPI.signIn(formData)
+    const data = res.data
 
-  const { payload } = useJwt(data.accessToken)
+    const { payload } = useJwt<{ exp: number; iat: number; role: string; sub: string }>(
+      data.accessToken
+    )
 
-  localStorage.setItem('username', payload.value ? payload.value.sub! : '')
-  localStorage.setItem('accessToken', data.accessToken)
-  localStorage.setItem('refreshToken', data.refreshToken)
+    if (payload.value) {
+      localStorage.setItem('username', payload.value ? payload.value.sub! : '')
+      localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
 
-  store.authenticate()
+      if (payload.value.role === 'ROLE_ADMIN') {
+        store.setAdmin()
+      }
+    } else {
+      alert('로그인에 실패했습니다.')
+    }
 
-  router.push('/books')
+    store.authenticate()
+
+    router.push('/books')
+  } catch (err) {
+    alert('로그인에 실패했습니다.')
+  }
 }
 </script>
 
