@@ -7,6 +7,12 @@ import { useAuthStore } from '@/stores/auth'
 const router = useRouter()
 const store = useAuthStore()
 
+const userName = computed(() => {
+  const uname = localStorage.getItem('username')
+
+  return uname
+})
+
 const logoutHandler = () => {
   store.unauthorized()
   localStorage.clear()
@@ -48,8 +54,8 @@ const logoutHandler = () => {
     <div class="navbar-end">
       <div class="dropdown dropdown-end" v-if="store.isAuth">
         <details class="dropdown">
-          <summary class="btn btn-ghost btn-circle">
-            <span class="material-symbols-outlined"> account_circle </span>
+          <summary class="btn btn-ghost">
+            <span>{{ userName }}</span>
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li v-if="store.isAuth"><button @click="logoutHandler">로그아웃</button></li>
