@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+import { useAuthStore } from '@/stores/auth'
+
+const router = useRouter()
 
 const isAdmin = computed(() => {
   const role = localStorage.getItem('role')
@@ -8,6 +13,17 @@ const isAdmin = computed(() => {
 
   return true
 })
+
+const isLoggedIn = computed(() => {
+  const store = useAuthStore()
+
+  return store.isAuth
+})
+
+const logoutHandler = () => {
+  localStorage.clear()
+  router.push('/')
+}
 </script>
 
 <template>
@@ -48,7 +64,8 @@ const isAdmin = computed(() => {
             <span class="material-symbols-outlined"> account_circle </span>
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li><a>로그인</a></li>
+            <li v-if="!isLoggedIn"><router-link to="/">로그인</router-link></li>
+            <li v-if="isLoggedIn"><button @click="logoutHandler">로그아웃</button></li>
             <li v-if="isAdmin"><a>계정 생성</a></li>
           </ul>
         </details>
