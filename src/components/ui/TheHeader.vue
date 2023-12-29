@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const isAdmin = computed(() => {
+  const role = localStorage.getItem('role')
+
+  if (!role || role === 'ROLE_USER') return false
+
+  return true
+})
+</script>
+
 <template>
   <div class="navbar bg-base-100">
     <div class="navbar-start">
@@ -21,7 +33,7 @@
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li><router-link to="/books">도서 검색</router-link></li>
-            <li><router-link to="/add-book">도서 추가</router-link></li>
+            <li v-if="isAdmin"><router-link to="/add-book">도서 추가</router-link></li>
           </ul>
         </details>
       </div>
@@ -37,7 +49,7 @@
           </summary>
           <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
             <li><a>로그인</a></li>
-            <li><a>계정 생성</a></li>
+            <li v-if="isAdmin"><a>계정 생성</a></li>
           </ul>
         </details>
       </div>
