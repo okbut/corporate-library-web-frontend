@@ -23,7 +23,7 @@ const onClickPageButton = (pageNum: number) => {
 }
 </script>
 <template>
-  <div class="flex justify-center pt-5 join">
+  <div class="flex justify-center pt-10 join">
     <template v-if="computedSelectedPageNumber + 1 > 4">
       <button class="join-item btn" @click="() => onClickPageButton(0)">1</button>
       <button class="join-item btn btn-disabled">...</button>
