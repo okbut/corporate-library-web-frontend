@@ -10,3 +10,8 @@ export type BookType = {
 }
 
 export type BookFormType = Omit<BookType, 'code'>
+
+export type SearchFormType = {
+  pageNum: number
+  keyword: string
+}

@@ -2,14 +2,21 @@ import { axiosInstance } from './axiosInstance'
 
 import type { AxiosResponse } from 'axios'
 import type { BookFormType } from './../types/books'
+import type { SearchFormType } from './../types/books'
 
 export const BooksAPI: {
-  list: (pageNum: number) => Promise<AxiosResponse<any, any>>
+  list: (searchForm: SearchFormType) => Promise<AxiosResponse<any, any>>
   detail: (code: string) => Promise<AxiosResponse<any, any>>
   add: (bookFormData: BookFormType) => Promise<AxiosResponse<any, any>>
 } = {
-  list: async (pageNum: number) => {
-    const response = await axiosInstance(`/api/books?page=${String(pageNum)}&size=10`)
+  list: async ({ pageNum, keyword }: SearchFormType) => {
+    let query = `?page=${String(pageNum)}&size=10`
+
+    if (keyword !== '') {
+      query = query.concat(`&q=${keyword}`)
+    }
+
+    const response = await axiosInstance(`/api/books?${query}`)
 
     return response
   },
