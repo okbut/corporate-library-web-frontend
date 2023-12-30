@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const enteredKeyword = defineModel<string>('enteredKeyword')
+</script>
+
 <template>
   <label class="relative w-4/5 max-w-xs form-control">
     <div class="absolute -translate-y-1/2 label top-1/2 left-1">
@@ -18,6 +22,10 @@
         </svg>
       </span>
     </div>
-    <input type="text" class="w-full max-w-xs pl-12 input input-bordered" />
+    <input
+      type="text"
+      class="w-full max-w-xs pl-12 input input-bordered"
+      v-model="enteredKeyword"
+    />
   </label>
 </template>
