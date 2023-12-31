@@ -16,7 +16,7 @@ export const BooksAPI: {
       query = query.concat(`&q=${keyword}`)
     }
 
-    const response = await axiosInstance(`/api/books?${query}`)
+    const response = await axiosInstance(`/api/books${query}`)
 
     return response
   },
