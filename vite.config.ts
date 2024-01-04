@@ -15,6 +15,7 @@ export default defineConfig({
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true'
   },
   server: {
+    host: true,
     proxy: {
       '/api': {
         target: 'http://192.168.0.130:8080',
